@@ -16,7 +16,7 @@ class Igrac {
             kocka1: prvaKocka,
             kocka2: drugaKocka
         });
-        return `${prvaKocka} + ${drugaKocka} = ${prvaKocka + drugaKocka}`; // Corrected the string template
+        return `${prvaKocka} + ${drugaKocka} = ${prvaKocka + drugaKocka}`;
     }
 }
 
@@ -34,6 +34,7 @@ function zapocniIgru() {
     const igrac1 = new Igrac(ime1);
     const igrac2 = new Igrac(ime2);
     const tbl = document.getElementById("tabela");
+    tbl.innerHTML = ""; // Clear previous table
     kreirajZaglavlje(tbl, ime1, ime2);
 
     for (let i = 0; i < 11; i++) {
@@ -50,12 +51,20 @@ function zapocniIgru() {
     }
 
     let elementZaglavlja = document.querySelectorAll("th");
+    const rezultat = document.getElementById("rezultat");
     if (igrac1.brojPobedaRundi > igrac2.brojPobedaRundi) {
         elementZaglavlja[0].style.color = "green";
         elementZaglavlja[1].style.color = "red";
+        rezultat.innerText = `Pobednik je: ${igrac1.ime}`;
+        rezultat.style.color = "green";
     } else if (igrac1.brojPobedaRundi < igrac2.brojPobedaRundi) {
         elementZaglavlja[0].style.color = "red";
         elementZaglavlja[1].style.color = "green";
+        rezultat.innerText = `Pobednik je: ${igrac2.ime}`;
+        rezultat.style.color = "green";
+    } else {
+        rezultat.innerText = "Igra je nerešena";
+        rezultat.style.color = "orange";
     }
 }
 
